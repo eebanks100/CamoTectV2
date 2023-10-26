@@ -1,7 +1,9 @@
 # CamoTectV2 Overview:
-This document provides instructions for setting up and running CamoTectV2. CamoTectV2 uses SINetV2 (Search and Identification Network Version 2) for semantic segmentation and SINetProc (Search and Identification Network Processor) for object detection and statistics gathering. The objective of this tool is to detect camouflaged heads against a camouflaged background.
+This document provides instructions for setting up and running CamoTectV2. CamoTectV2 uses SINet-V2 (Search and Identification Network Version 2) for semantic segmentation and SINetProc (Search and Identification Network Processor) for object detection and statistics gathering. The objective of this tool is to detect camouflaged heads against a camouflaged background.
 
-The two main goals CamoTectV2 achieves is image classification (SINetProc) and image segmentation (SINetV2). SINetProc is designed to create bounding boxes around the head object, edge detection, and image classification which involves identifying the class of an image as being a positive or negative image. An image is classified as being a positive image if there is a head detected somewhere within it. If there is no head detected in an image, then it will be classified as being a negative image. SINetV2 is the deep neural network used to outline the image region of where the head object is.
+The two main goals CamoTectV2 achieves is image classification (SINetProc) and image segmentation (SINet-V2). SINetProc is designed to create bounding boxes around the head object, edge detection, and image classification which involves identifying the class of an image as being a positive or negative image. An image is classified as being a positive image if there is a head detected somewhere within it. If there is no head detected in an image, then it will be classified as being a negative image. SINet-V2 is the deep neural network used to outline the image region of where the head object is.
+
+SINet-V2 has been modified to exclude the use of ground truth images for the test dataset which helps to play a role in live detection concealed object detection using a camera.
 
 
 Note that SINet-V2 is only tested on Ubuntu OS and Windows OS
@@ -91,7 +93,7 @@ After many training runs using SINetV2, we found that when running the first rou
 
 These pre-trained weights are later loaded using the following command: `python train.py –load [path to best weight file]`,  when introducing noise within the next dataset to make the model more robust. For the size of the datasets, 5000 images is the minimum number of images we used.
 
-[Generating a Dataset Using Image Generator](./../ImageGen/README.md)
+[Generating a Dataset Using Image Generator](https://github.com/eebanks100/ImageGenerator)
 
 
 Below is an example of how SINetV2 training would take place training in batches of 5000 images:
@@ -105,3 +107,19 @@ Valid Dataset: 5000 Positive Background/Ground Truth Images (different from trai
 Train Dataset: 2500 Positive & 2500 Negative Background/Ground Truth Images
 Valid Dataset: 5000 Positive Background/Ground Truth Images (different from train)
 `python train.py –load ./train_output/run1/Net_epoch_best.pth –dataname “run2”`
+
+
+
+##### SINetProc and ImageGen developers:
+- Elisha Ebanks
+- Jacob Doby
+- Atabey Abbasi
+
+
+###### SINet-V2 Citation
+PyTorch implementation of our extended model, termed as Search and Identification Network (SINet-V2), for the COD task: https://github.com/GewelsJI/SINet-V2
+
+Authors: Deng-Ping Fan, Ge-Peng Ji, Ming-Ming Cheng* & Ling Shao.
+
+
+
